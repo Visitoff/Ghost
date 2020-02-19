@@ -6,16 +6,17 @@ public class GhostInstanitate : MonoBehaviour
 {
     GameObject GhostPrefab;
     public Animation anim;
+    public Animation anim2;
     void Start()
     {
-        
+        anim.Play();
     }
 
     
     void Update()
     {
+
         
-        anim.Play();
     }
 
    

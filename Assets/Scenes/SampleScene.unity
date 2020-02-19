@@ -197,13 +197,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137245800}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0.064, y: -1.089, z: 9.428}
   m_LocalScale: {x: 2, y: 1, z: 1.4233356}
   m_Children: []
   m_Father: {fileID: 1242044306}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1138436318}
+  anim2: {fileID: 0}
 --- !u!1 &1216144083
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,15 +424,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6f17c963ca0ad9d49a4ad8dab3615cb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 21.551851
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6f17c963ca0ad9d49a4ad8dab3615cb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 271.2708
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6f17c963ca0ad9d49a4ad8dab3615cb7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -6.303215
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6f17c963ca0ad9d49a4ad8dab3615cb7, type: 3}
       propertyPath: m_LocalScale.x
@@ -523,14 +524,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242044303}
-  m_LocalRotation: {x: -0.006115943, y: -0, z: -0, w: 0.9999813}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.01, y: 1.089, z: -2.418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 137245804}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -0.70100003, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1242044307
 MonoBehaviour:
   m_ObjectHideFlags: 0
