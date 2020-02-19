@@ -16,7 +16,7 @@ public class GhostInstanitate : MonoBehaviour
     void Update()
     {
 
-        
+            
     }
 
    
