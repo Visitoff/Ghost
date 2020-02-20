@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
 public class CameraRotate : MonoBehaviour
-{
-   
+{   
     void Start()
     {  if (Application.isMobilePlatform)
         {
@@ -14,11 +13,10 @@ public class CameraRotate : MonoBehaviour
         Input.gyro.enabled = true;
     }
 
-    
     void Update()
     {
         Quaternion cameraRotation = new Quaternion(Input.gyro.attitude.x, Input.gyro.attitude.y,
-            -Input.gyro.attitude.z, -Input.gyro.attitude.w);
+        -Input.gyro.attitude.z, -Input.gyro.attitude.w);
         this.transform.localRotation = cameraRotation;
     }
 }
