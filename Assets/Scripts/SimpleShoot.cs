@@ -10,7 +10,7 @@ public class SimpleShoot : RayCast
             nextTimeToFire = Time.time + 15f / fireRate;
             Shoot();
 
-            }
+        }
     }
 }
 
