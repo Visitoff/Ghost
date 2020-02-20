@@ -17,4 +17,5 @@ public class GhostTarget : MonoBehaviour
     {
         ghostCam = true;
     }
+    
 }
