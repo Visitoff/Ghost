@@ -2,22 +2,22 @@
 
 public class CameraRotate : MonoBehaviour
 {   
-    void Start()
+    void Start() 
     {  
         if (Application.isMobilePlatform)
         {
             GameObject cameraParent = new GameObject("camParent");
             cameraParent.transform.position = this.transform.position;
             this.transform.parent = cameraParent.transform;
-            cameraParent.transform.Rotate(Vector3.right, 90 * Time.deltaTime); 
+            cameraParent.transform.Rotate(Vector3.right, 90); 
         }
         Input.gyro.enabled = true;
     }
 
     void Update()
     {
-        Quaternion cameraRotation = new Quaternion(Input.gyro.attitude.x, Input.gyro.attitude.y,
-        -Input.gyro.attitude.z, -Input.gyro.attitude.w * Time.deltaTime);
-        this.transform.localRotation = cameraRotation;
+        Quaternion cameraRotation = new Quaternion(Input.gyro.attitude.x * Time.deltaTime, Input.gyro.attitude.y * Time.deltaTime,
+        -Input.gyro.attitude.z * Time.deltaTime, -Input.gyro.attitude.w * Time.deltaTime);
+        this.transform.localRotation = cameraRotation ;
     }
 }
