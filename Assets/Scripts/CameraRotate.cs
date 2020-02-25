@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 
 public class CameraRotate : MonoBehaviour
-{
-    float clampDistance = Screen.width * 0.05f;
+{   float lastValue;
+    private float nemX; 
+    private float nemY;
+    private float nemZ;
+    private float nemW;
+
     void Start()
     {
         if (Application.isMobilePlatform)
@@ -14,21 +18,34 @@ public class CameraRotate : MonoBehaviour
         }
         Input.gyro.enabled = true;
     }
-
+    public void delta()
+    {
+         
+    }
     void Update()
+    {
+        float deltaValue = (nemX + nemY + nemZ + nemW) - lastValue;
+
+        lastValue = (nemX + nemY + nemZ + nemW);
+        if (deltaValue > 0.5f)
+        {
+            Rotate();
+        }
+        
+        
+    }
+
+    private void Rotate()
     {
         Quaternion zeroZone = new Quaternion(0f, 0f, 0f, 0f);
         Quaternion cameraRotation = new Quaternion(Input.gyro.attitude.x * Time.deltaTime, Input.gyro.attitude.y * Time.deltaTime,
         -Input.gyro.attitude.z * Time.deltaTime, -Input.gyro.attitude.w * Time.deltaTime);
         this.transform.localRotation = cameraRotation;
-        Debug.Log(cameraRotation);
-        if (cameraRotation = 0f) 
-        {
-
-        }
-        Quaternion cameraRotation { get; }
-
+        cameraRotation.Set(nemX, nemY, nemZ, nemW);
     }
+
+    
+    
 }
     
  
