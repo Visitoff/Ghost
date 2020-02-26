@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
 public class CameraRotate : MonoBehaviour
-{   float lastValue;
-    private float nemX; 
+{
+    float lastValue;
+    private float nemX;
     private float nemY;
     private float nemZ;
     private float nemW;
+    
 
     void Start()
     {
@@ -20,32 +22,18 @@ public class CameraRotate : MonoBehaviour
     }
     public void delta()
     {
-         
+        float deltaValue = (nemX + nemY + nemZ + nemW) - lastValue;
+        lastValue = (nemX + nemY + nemZ + nemW);
+        if (deltaValue > 0.05f)
+        {
+            Quaternion cameraRotation = new Quaternion(Input.gyro.attitude.x * Time.deltaTime, Input.gyro.attitude.y * Time.deltaTime,
+            -Input.gyro.attitude.z * Time.deltaTime, -Input.gyro.attitude.w * Time.deltaTime);
+            cameraRotation.Set(nemX, nemY, nemZ, nemW);
+            this.transform.localRotation = cameraRotation;
+        }
     }
     void Update()
     {
-        float deltaValue = (nemX + nemY + nemZ + nemW) - lastValue;
-
-        lastValue = (nemX + nemY + nemZ + nemW);
-        if (deltaValue > 0.5f)
-        {
-            Rotate();
-        }
-        
-        
+        delta();
     }
-
-    private void Rotate()
-    {
-        Quaternion zeroZone = new Quaternion(0f, 0f, 0f, 0f);
-        Quaternion cameraRotation = new Quaternion(Input.gyro.attitude.x * Time.deltaTime, Input.gyro.attitude.y * Time.deltaTime,
-        -Input.gyro.attitude.z * Time.deltaTime, -Input.gyro.attitude.w * Time.deltaTime);
-        this.transform.localRotation = cameraRotation;
-        cameraRotation.Set(nemX, nemY, nemZ, nemW);
-    }
-
-    
-    
 }
-    
- 
