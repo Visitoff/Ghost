@@ -4,11 +4,11 @@ public class CameraRotate : MonoBehaviour
 {
 
     Quaternion cameraRotation;
-    float newXX, newYY, newZZ, newWW;
-    float newX, newY, newZ, newW;
+    float X, Y, Z;
+    float newX, newY, newZ;
     float deltabc;
-    float FirstQuaternion;
-    float SecondlyQuaternion;
+    float FirstQuaternionValue;
+
 
     void Start()
     {
@@ -20,42 +20,38 @@ public class CameraRotate : MonoBehaviour
             cameraParent.transform.Rotate(Vector3.right, 90);
         }
         Input.gyro.enabled = true;
-        cameraRotation.Set(newXX, newYY, newZZ, newWW);
-        FirstQuaternion = Mathf.Abs(newXX) + Mathf.Abs(newYY) + Mathf.Abs(newZZ);
+        cameraRotation = Quaternion.Euler(X, Y, Z);
+        FirstQuaternionValue = Mathf.Abs(X) + Mathf.Abs(Y) + Mathf.Abs(Z);
     }
     void Update()
     {
-        truedelta();
-        delta();
+        IfNeedTransform();
+        QuanternionDelta();
     }
 
 
 
-    public void delta()
+    public void IfNeedTransform()
     {
-        Quaternion cameraRotation = new Quaternion(
-            Input.gyro.attitude.x * Time.deltaTime,
-            Input.gyro.attitude.y * Time.deltaTime,
-           -Input.gyro.attitude.z * Time.deltaTime,
-           -Input.gyro.attitude.w * Time.deltaTime);
+        cameraRotation = new Quaternion(
+           Input.gyro.attitude.x * Time.deltaTime,
+           Input.gyro.attitude.y * Time.deltaTime,
+          -Input.gyro.attitude.z * Time.deltaTime,
+          -Input.gyro.attitude.w * Time.deltaTime);
 
-        cameraRotation.Set(newX, newY, newZ, newW);
+        cameraRotation = Quaternion.Euler(newX, newY, newZ);
         if (deltabc > 0.05f)
-        {
-            this.transform.localRotation = cameraRotation;
-        }
-        if (deltabc < 0.05f)
         {
             this.transform.localRotation = cameraRotation;
         }
     }
-    void truedelta()
+    void QuanternionDelta()
     {
-        SecondlyQuaternion = (Mathf.Abs(newX) + Mathf.Abs(newY) + Mathf.Abs(newZ));
-        float deltabc = SecondlyQuaternion - FirstQuaternion;
+        float SecondlyQuaternionValue = (Mathf.Abs(newX) + Mathf.Abs(newY) + Mathf.Abs(newZ));
+        float deltabc = SecondlyQuaternionValue - FirstQuaternionValue;
         if (deltabc > 0.05f)
         {
-            SecondlyQuaternion = FirstQuaternion;
+            SecondlyQuaternionValue = FirstQuaternionValue;
         }
     }
 }
