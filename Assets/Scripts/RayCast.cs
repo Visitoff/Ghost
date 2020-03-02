@@ -18,7 +18,7 @@ public class RayCast : MonoBehaviour
     {
         
     }
-    public void Shoot()
+    public void Shoot() 
     {
         
         RaycastHit hit;
