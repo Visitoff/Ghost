@@ -4,10 +4,12 @@ public class CameraRotate : MonoBehaviour
 {
 
     Quaternion cameraRotation;
-    float X, Y, Z;
-    float newX, newY, newZ;
     float deltabc;
     float FirstQuaternionValue;
+    float ValueOfInputX, ValueOfInputY, ValueOfInputZ, ValueOfInputW;
+    float StartValueOfInputX, StartValueOfInputY, StartValueOfInputZ, StartValueOfInputW;
+
+
 
 
     void Start()
@@ -20,38 +22,44 @@ public class CameraRotate : MonoBehaviour
             cameraParent.transform.Rotate(Vector3.right, 90);
         }
         Input.gyro.enabled = true;
-        cameraRotation = Quaternion.Euler(X, Y, Z);
-        FirstQuaternionValue = Mathf.Abs(X) + Mathf.Abs(Y) + Mathf.Abs(Z);
+        StartValueOfInputX = Input.gyro.attitude.x * Time.deltaTime;
+        StartValueOfInputY = Input.gyro.attitude.y * Time.deltaTime;
+        StartValueOfInputZ = -Input.gyro.attitude.z * Time.deltaTime;
+        StartValueOfInputW = -Input.gyro.attitude.w * Time.deltaTime;
+        FirstQuaternionValue = Mathf.Abs(StartValueOfInputX) + Mathf.Abs(StartValueOfInputY) + Mathf.Abs(StartValueOfInputZ) + Mathf.Abs(StartValueOfInputW);
     }
     void Update()
     {
-        IfNeedTransform();
-        QuanternionDelta();
+        InputSystem();
+        QuanternionDelta(); 
     }
 
 
 
-    public void IfNeedTransform()
+    public void InputSystem()
     {
         cameraRotation = new Quaternion(
-           Input.gyro.attitude.x * Time.deltaTime,
-           Input.gyro.attitude.y * Time.deltaTime,
-          -Input.gyro.attitude.z * Time.deltaTime,
-          -Input.gyro.attitude.w * Time.deltaTime);
+          ValueOfInputX,
+          ValueOfInputY,
+          ValueOfInputZ,
+          ValueOfInputW);
 
-        cameraRotation = Quaternion.Euler(newX, newY, newZ);
-        if (deltabc > 0.05f)
-        {
-            this.transform.localRotation = cameraRotation;
-        }
+
+        ValueOfInputX = Input.gyro.attitude.x * Time.deltaTime;
+        ValueOfInputY = Input.gyro.attitude.y * Time.deltaTime;
+        ValueOfInputZ = -Input.gyro.attitude.z * Time.deltaTime;
+        ValueOfInputW = -Input.gyro.attitude.w * Time.deltaTime;
+        this.transform.localRotation = cameraRotation;
     }
     void QuanternionDelta()
     {
-        float SecondlyQuaternionValue = (Mathf.Abs(newX) + Mathf.Abs(newY) + Mathf.Abs(newZ));
-        float deltabc = SecondlyQuaternionValue - FirstQuaternionValue;
+        float SecondlyQuaternionValue = Mathf.Abs(ValueOfInputX) + Mathf.Abs(ValueOfInputY) + Mathf.Abs(ValueOfInputZ) + Mathf.Abs(ValueOfInputW);
+        deltabc = SecondlyQuaternionValue - FirstQuaternionValue;
         if (deltabc > 0.05f)
         {
             SecondlyQuaternionValue = FirstQuaternionValue;
+            this.transform.localRotation = cameraRotation;
         }
     }
+    
 }
